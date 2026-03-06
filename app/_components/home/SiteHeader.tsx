@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
@@ -12,8 +12,20 @@ interface SiteHeaderProps {
   isPremium?: boolean;
 }
 
-export function SiteHeader({ user, isPremium = false }: SiteHeaderProps) {
+export function SiteHeader({ user: initialUser, isPremium = false }: SiteHeaderProps) {
+  const [user, setUser] = useState<User | null>(initialUser);
   const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    // マウント時に最新のセッションを取得
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    // auth状態の変化を監視
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   async function handleLogout() {
     const supabase = createClient();
