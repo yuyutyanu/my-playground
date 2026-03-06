@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { condensedFontClass } from "@/app/_lib/typography";
@@ -8,15 +9,22 @@ import { LoginModal } from "@/app/_components/auth/LoginModal";
 
 interface SiteHeaderProps {
   user: User | null;
+  isPremium?: boolean;
 }
 
-export function SiteHeader({ user }: SiteHeaderProps) {
+export function SiteHeader({ user, isPremium = false }: SiteHeaderProps) {
   const [showLogin, setShowLogin] = useState(false);
 
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
     location.reload();
+  }
+
+  async function handlePortal() {
+    const res = await fetch("/api/stripe/portal", { method: "POST" });
+    const data = await res.json();
+    if (data.url) window.location.href = data.url;
   }
 
   return (
@@ -32,7 +40,21 @@ export function SiteHeader({ user }: SiteHeaderProps) {
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              <span className="hidden text-xs text-[#5c5c5c] md:block">{user.email}</span>
+              {isPremium ? (
+                <button
+                  onClick={handlePortal}
+                  className={`${condensedFontClass} bg-[#c45c26] px-3 py-1 text-[10px] tracking-widest text-white hover:bg-[#a84d1e] transition-colors`}
+                >
+                  PREMIUM
+                </button>
+              ) : (
+                <Link
+                  href="/pricing"
+                  className={`${condensedFontClass} text-xs tracking-wide text-[#c45c26] hover:underline`}
+                >
+                  プレミアムに登録
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
                 className={`${condensedFontClass} border border-[#2b2b2b] px-4 py-2 text-xs tracking-[0.08em] text-[#2b2b2b] hover:bg-[#2b2b2b] hover:text-white transition-colors`}
