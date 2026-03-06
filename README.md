@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coffie House — 技術検証リポジトリ
 
-## Getting Started
+Next.js + Supabase + Stripe を使った Web アプリの技術検証用プロジェクト。
+コーヒーショップのランディングページをベースに、認証・サブスクリプション決済の実装を検証する。
 
-First, run the development server:
+## 検証内容
+
+| 機能 | 技術スタック |
+|---|---|
+| ランディングページ | Next.js 16 / Tailwind CSS v4 |
+| Google OAuth ログイン | Supabase Auth |
+| 月額サブスクリプション | Stripe Checkout |
+| Webhook によるサブスク状態管理 | Stripe Webhook + Supabase |
+| デザインファイル | Pencil (.pen) |
+
+## 技術スタック
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Auth / DB**: Supabase
+- **Payment**: Stripe
+- **Deploy**: Vercel
+
+## セットアップ
+
+### 1. 依存関係インストール
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. 環境変数の設定
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`.env.local` を作成して以下を設定：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
 
-## Learn More
+STRIPE_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PRICE_ID=price_...
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Supabase テーブル作成
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Supabase の SQL Editor で `supabase/migrations/001_subscriptions.sql` を実行する。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. 開発サーバー起動
 
-## Deploy on Vercel
+```bash
+# Stripe Webhook の転送（別ターミナル）
+stripe listen --forward-to localhost:3000/api/stripe/webhook
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 開発サーバー
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`http://localhost:3000` を開く。
+
+## 外部サービスの設定
+
+### Supabase
+- Authentication → Sign In / Providers → Google を有効化
+- Authentication → URL Configuration → Site URL を設定
+
+### Google Cloud Console
+- OAuth 2.0 クライアント ID を作成
+- 承認済みリダイレクト URI に `https://xxxx.supabase.co/auth/v1/callback` を追加
+
+### Stripe
+- Products でサブスクリプションプランを作成
+- Webhooks にエンドポイント URL を登録
+
+## ディレクトリ構成
+
+```
+app/
+├── _components/
+│   ├── auth/        # ログインモーダル
+│   └── home/        # ランディングページコンポーネント
+├── api/stripe/      # Stripe API ルート
+├── auth/callback/   # OAuth コールバック
+└── pricing/         # プラン選択ページ
+lib/
+├── supabase/        # Supabase クライアント
+└── stripe.ts        # Stripe クライアント
+supabase/
+└── migrations/      # DB マイグレーション SQL
+docs/                # 実行計画
+```
