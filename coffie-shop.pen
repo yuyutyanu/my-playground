@@ -1373,6 +1373,506 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "cwwwg",
+      "x": 3080,
+      "y": 0,
+      "name": "Pricing Page",
+      "width": 1440,
+      "height": 900,
+      "fill": "#F4F3F1",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "a2Joj",
+          "name": "Header",
+          "width": "fill_container",
+          "fill": "#F4F3F1",
+          "gap": 32,
+          "padding": [
+            24,
+            72
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "hIBgB",
+              "name": "pLogo",
+              "fill": "#1C1C1C",
+              "content": "COFFIE HOUSE",
+              "fontFamily": "Barlow Semi Condensed",
+              "fontSize": 24,
+              "fontWeight": "bold",
+              "letterSpacing": 2
+            },
+            {
+              "type": "frame",
+              "id": "VxG4T",
+              "name": "pNav",
+              "gap": 24,
+              "padding": [
+                8,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lVNPa",
+                  "name": "pN1",
+                  "fill": "#5C5C5C",
+                  "content": "Menu",
+                  "fontFamily": "Source Serif 4",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "mUlPC",
+                  "name": "pN2",
+                  "fill": "#5C5C5C",
+                  "content": "Story",
+                  "fontFamily": "Source Serif 4",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "4HmGs",
+                  "name": "pN3",
+                  "fill": "#5C5C5C",
+                  "content": "Shops",
+                  "fontFamily": "Source Serif 4",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "x9v2F",
+              "name": "pBtns",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "F8ero",
+                  "name": "pPremiumBadge",
+                  "fill": "#C45C26",
+                  "padding": [
+                    4,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "0DCvB",
+                      "name": "pPremiumTxt",
+                      "fill": "#FFFFFF",
+                      "content": "PREMIUM",
+                      "fontFamily": "Barlow Semi Condensed",
+                      "fontSize": 10,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hDPMS",
+                  "name": "pLogoutBtn",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2B2B2B"
+                  },
+                  "padding": [
+                    10,
+                    18
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jMG7t",
+                      "name": "pLogoutTxt",
+                      "fill": "#2B2B2B",
+                      "content": "LOG OUT",
+                      "fontFamily": "Barlow Semi Condensed",
+                      "fontSize": 12,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ilG2U",
+                  "name": "pOrderBtn",
+                  "fill": "#2B2B2B",
+                  "padding": [
+                    10,
+                    18
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kV55K",
+                      "name": "pOrderTxt",
+                      "fill": "#FFFFFF",
+                      "content": "ORDER NOW",
+                      "fontFamily": "Barlow Semi Condensed",
+                      "fontSize": 12,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "YQ1Ta",
+          "name": "body",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            40,
+            72,
+            64,
+            72
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "sa3ER",
+              "name": "tag",
+              "fill": "#C45C26",
+              "content": "MEMBERSHIP",
+              "fontFamily": "Barlow Semi Condensed",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "q9UFO",
+              "name": "title",
+              "fill": "#1C1C1C",
+              "content": "プレミアム会員",
+              "fontFamily": "Source Serif 4",
+              "fontSize": 48,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "WG0Uq",
+              "name": "desc",
+              "fill": "#5C5C5C",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "豆の定期便、先行予約、バリスタ相談など\nコーヒーをもっと深く楽しむための特典をご用意しています。",
+              "lineHeight": 1.6,
+              "fontFamily": "Source Serif 4",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "ml0HX",
+              "name": "cards",
+              "width": "fill_container",
+              "gap": 24,
+              "padding": [
+                24,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RKLzt",
+                  "name": "freeCard",
+                  "width": 400,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 2,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D4D2CE"
+                  },
+                  "layout": "vertical",
+                  "padding": 40,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Wed1o",
+                      "name": "freeTag",
+                      "fill": "#8C8A87",
+                      "content": "FREE",
+                      "fontFamily": "Barlow Semi Condensed",
+                      "fontSize": 11,
+                      "fontWeight": "normal",
+                      "letterSpacing": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "FRwQ3",
+                      "name": "freePrice",
+                      "fill": "#1C1C1C",
+                      "content": "¥0",
+                      "fontFamily": "Source Serif 4",
+                      "fontSize": 40,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UdSBv",
+                      "name": "freePer",
+                      "fill": "#8C8A87",
+                      "content": "/ 月",
+                      "fontFamily": "Source Serif 4",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "dhq9l",
+                      "name": "freeDivider",
+                      "fill": "#E0DED9",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mPKAa",
+                      "name": "freeFeatures",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        20,
+                        0,
+                        24,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "eG0VL",
+                          "name": "ff1",
+                          "fill": "#5C5C5C",
+                          "content": "✓  オンラインショップ",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "L8e5D",
+                          "name": "ff2",
+                          "fill": "#5C5C5C",
+                          "content": "✓  メニュー閲覧",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "I8Xye",
+                          "name": "ff3",
+                          "fill": "#5C5C5C",
+                          "content": "✓  店舗検索",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vUjhh",
+                      "name": "freeCurrent",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#D4D2CE"
+                      },
+                      "padding": [
+                        12,
+                        0
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "60qbU",
+                          "name": "freeCurrentTxt",
+                          "fill": "#8C8A87",
+                          "content": "現在のプラン",
+                          "fontFamily": "Barlow Semi Condensed",
+                          "fontSize": 11,
+                          "fontWeight": "normal",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "AutXH",
+                  "name": "premiumCard",
+                  "width": 400,
+                  "fill": "#2B2B2B",
+                  "cornerRadius": 2,
+                  "layout": "vertical",
+                  "padding": 40,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ETp2c",
+                      "name": "premTag",
+                      "fill": "#C45C26",
+                      "content": "PREMIUM",
+                      "fontFamily": "Barlow Semi Condensed",
+                      "fontSize": 11,
+                      "fontWeight": "normal",
+                      "letterSpacing": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "W4aV7",
+                      "name": "premPrice",
+                      "fill": "#FFFFFF",
+                      "content": "¥980",
+                      "fontFamily": "Source Serif 4",
+                      "fontSize": 40,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "An5DU",
+                      "name": "premPer",
+                      "fill": "#8C8A87",
+                      "content": "/ 月（税込）",
+                      "fontFamily": "Source Serif 4",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "XyY2m",
+                      "name": "premDivider",
+                      "fill": "#3E3E3E",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nOSJv",
+                      "name": "premFeatures",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        20,
+                        0,
+                        24,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ewHNg",
+                          "name": "pf1",
+                          "fill": "#D4D2CE",
+                          "content": "✓  Free プランすべて",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "stNPe",
+                          "name": "pf2",
+                          "fill": "#D4D2CE",
+                          "content": "✓  豆の定期便 10% OFF",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kb42k",
+                          "name": "pf3",
+                          "fill": "#D4D2CE",
+                          "content": "✓  新作豆の先行予約",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "elxVR",
+                          "name": "pf4",
+                          "fill": "#D4D2CE",
+                          "content": "✓  バリスタ相談（月1回）",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OxrL2",
+                          "name": "pf5",
+                          "fill": "#D4D2CE",
+                          "content": "✓  会員限定レシピ",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LwshN",
+                      "name": "premBtn",
+                      "width": "fill_container",
+                      "fill": "#C45C26",
+                      "padding": [
+                        14,
+                        0
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "K0Zzz",
+                          "name": "premBtnTxt",
+                          "fill": "#FFFFFF",
+                          "content": "プレミアムに登録する",
+                          "fontFamily": "Barlow Semi Condensed",
+                          "fontSize": 13,
+                          "fontWeight": "normal",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
