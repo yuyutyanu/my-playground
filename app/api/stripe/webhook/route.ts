@@ -21,13 +21,17 @@ async function upsertSubscription(
   const userId = subscription.metadata?.supabase_user_id;
   if (!userId) return;
 
+  // current_period_end は新 API では items から取得
+  const periodEnd = subscription.items.data[0]?.current_period_end
+    ?? (subscription as unknown as { current_period_end?: number }).current_period_end;
+
   await supabase.from("subscriptions").upsert({
     user_id: userId,
     stripe_customer_id: subscription.customer as string,
     stripe_subscription_id: subscription.id,
     status: subscription.status,
     price_id: subscription.items.data[0]?.price.id,
-    current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+    current_period_end: periodEnd ? new Date(periodEnd * 1000).toISOString() : null,
   }, { onConflict: "user_id" });
 }
 
