@@ -10,15 +10,20 @@ export default function PricingPage() {
 
   async function handleSubscribe() {
     setLoading(true);
-    const res = await fetch("/api/stripe/checkout", { method: "POST" });
-    const data = await res.json();
+    try {
+      const res = await fetch("/api/stripe/checkout", { method: "POST" });
+      const data = await res.json();
 
-    if (res.status === 401) {
-      router.push("/");
-      return;
-    }
-    if (data.url) {
-      window.location.href = data.url;
+      if (res.status === 401) {
+        router.push("/");
+        return;
+      }
+      if (data.url) {
+        window.location.href = data.url;
+        return;
+      }
+    } catch (err) {
+      console.error(err);
     }
     setLoading(false);
   }

@@ -10,16 +10,23 @@ export async function POST() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // 既存の Stripe Customer ID を取得
-  const { data: subscription } = await supabase
+  const { data: subscriptionRow } = await supabase
     .from("subscriptions")
-    .select("stripe_customer_id")
+    .select("stripe_customer_id, stripe_subscription_id, status")
     .eq("user_id", user.id)
     .single();
 
-  let customerId = subscription?.stripe_customer_id;
+  // すでにアクティブなサブスクがある場合はポータルへ誘導
+  if (subscriptionRow?.status === "active" && subscriptionRow?.stripe_customer_id) {
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: subscriptionRow.stripe_customer_id,
+      return_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/pricing`,
+    });
+    return NextResponse.json({ url: portalSession.url });
+  }
 
-  // Customer がなければ作成
+  let customerId = subscriptionRow?.stripe_customer_id;
+
   if (!customerId) {
     const customer = await stripe.customers.create({
       email: user.email,
@@ -28,16 +35,20 @@ export async function POST() {
     customerId = customer.id;
   }
 
-  const session = await stripe.checkout.sessions.create({
-    customer: customerId,
-    mode: "subscription",
-    line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/?checkout=success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/pricing`,
-    subscription_data: {
-      metadata: { supabase_user_id: user.id },
-    },
-  });
-
-  return NextResponse.json({ url: session.url });
+  try {
+    const session = await stripe.checkout.sessions.create({
+      customer: customerId,
+      mode: "subscription",
+      line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/?checkout=success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/pricing`,
+      subscription_data: {
+        metadata: { supabase_user_id: user.id },
+      },
+    });
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return NextResponse.json({ error: "Failed to create checkout session" }, { status: 500 });
+  }
 }
