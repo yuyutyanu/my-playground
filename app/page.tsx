@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { HomePage } from "@/app/_components/home/HomePage";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
