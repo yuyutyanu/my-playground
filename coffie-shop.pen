@@ -1843,26 +1843,80 @@
                     },
                     {
                       "type": "frame",
-                      "id": "LwshN",
-                      "name": "premBtn",
+                      "id": "H2dn9",
+                      "name": "premStatus",
                       "width": "fill_container",
-                      "fill": "#C45C26",
-                      "padding": [
-                        14,
-                        0
-                      ],
-                      "justifyContent": "center",
+                      "layout": "vertical",
+                      "gap": 10,
                       "children": [
                         {
+                          "type": "frame",
+                          "id": "hDK9Y",
+                          "name": "premCurrentBadge",
+                          "width": "fill_container",
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#C45C26"
+                          },
+                          "padding": [
+                            14,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "g8OJj",
+                              "name": "premCurrentTxt",
+                              "fill": "#C45C26",
+                              "content": "現在のプラン",
+                              "fontFamily": "Barlow Semi Condensed",
+                              "fontSize": 11,
+                              "fontWeight": "normal",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        },
+                        {
                           "type": "text",
-                          "id": "K0Zzz",
-                          "name": "premBtnTxt",
-                          "fill": "#FFFFFF",
-                          "content": "プレミアムに登録する",
-                          "fontFamily": "Barlow Semi Condensed",
-                          "fontSize": 13,
-                          "fontWeight": "normal",
-                          "letterSpacing": 1
+                          "id": "SkpyP",
+                          "name": "renewDate",
+                          "fill": "#8C8A87",
+                          "content": "次回更新日: 2025年4月7日",
+                          "textAlign": "center",
+                          "fontFamily": "Source Serif 4",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aC9GV",
+                          "name": "cancelBtn",
+                          "width": "fill_container",
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#8C8A87"
+                          },
+                          "padding": [
+                            14,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Xr2kC",
+                              "name": "cancelTxt",
+                              "fill": "#8C8A87",
+                              "content": "フリープランに変更する",
+                              "fontFamily": "Barlow Semi Condensed",
+                              "fontSize": 11,
+                              "fontWeight": "normal",
+                              "letterSpacing": 1
+                            }
+                          ]
                         }
                       ]
                     }

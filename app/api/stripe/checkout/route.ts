@@ -12,17 +12,12 @@ export async function POST() {
 
   const { data: subscriptionRow } = await supabase
     .from("subscriptions")
-    .select("stripe_customer_id, stripe_subscription_id, status")
+    .select("stripe_customer_id, status")
     .eq("user_id", user.id)
     .single();
 
-  // すでにアクティブなサブスクがある場合はポータルへ誘導
-  if (subscriptionRow?.status === "active" && subscriptionRow?.stripe_customer_id) {
-    const portalSession = await stripe.billingPortal.sessions.create({
-      customer: subscriptionRow.stripe_customer_id,
-      return_url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/pricing`,
-    });
-    return NextResponse.json({ url: portalSession.url });
+  if (subscriptionRow?.status === "active") {
+    return NextResponse.json({ error: "Already subscribed" }, { status: 400 });
   }
 
   let customerId = subscriptionRow?.stripe_customer_id;
