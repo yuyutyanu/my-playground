@@ -1,6 +1,15 @@
 import { createClient } from "@/lib/supabase/server";
+import { createServerClient } from "@supabase/ssr";
 import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
+
+function getSupabaseAdmin() {
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { cookies: { getAll: () => [], setAll: () => {} } }
+  );
+}
 
 export async function POST() {
   const supabase = await createClient();
@@ -24,7 +33,9 @@ export async function POST() {
     cancel_at_period_end: true,
   });
 
-  await supabase
+  // RLS を回避するためサービスロールで更新
+  const adminSupabase = getSupabaseAdmin();
+  await adminSupabase
     .from("subscriptions")
     .update({ cancel_at_period_end: true })
     .eq("user_id", user.id);
