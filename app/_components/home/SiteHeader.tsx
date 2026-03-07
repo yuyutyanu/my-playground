@@ -33,12 +33,6 @@ export function SiteHeader({ user: initialUser, isPremium = false }: SiteHeaderP
     location.reload();
   }
 
-  async function handlePortal() {
-    const res = await fetch("/api/stripe/portal", { method: "POST" });
-    const data = await res.json();
-    if (data.url) window.location.href = data.url;
-  }
-
   return (
     <>
       <header className="flex flex-wrap items-center justify-between gap-4 px-5 py-5 md:px-[72px]">
@@ -53,12 +47,12 @@ export function SiteHeader({ user: initialUser, isPremium = false }: SiteHeaderP
           {user ? (
             <>
               {isPremium ? (
-                <button
-                  onClick={handlePortal}
+                <Link
+                  href="/pricing"
                   className={`${condensedFontClass} bg-[#c45c26] px-3 py-1 text-[10px] tracking-widest text-white hover:bg-[#a84d1e] transition-colors`}
                 >
                   PREMIUM
-                </button>
+                </Link>
               ) : (
                 <Link
                   href="/pricing"
