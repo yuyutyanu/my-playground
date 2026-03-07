@@ -24,5 +24,10 @@ export async function POST() {
     cancel_at_period_end: true,
   });
 
+  await supabase
+    .from("subscriptions")
+    .update({ cancel_at_period_end: true })
+    .eq("user_id", user.id);
+
   return NextResponse.json({ success: true });
 }

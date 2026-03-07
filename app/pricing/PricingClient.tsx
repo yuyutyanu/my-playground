@@ -9,12 +9,13 @@ interface Props {
   subscription: {
     status: string;
     current_period_end: string | null;
+    cancel_at_period_end: boolean;
   } | null;
 }
 
 export function PricingClient({ isLoggedIn, subscription }: Props) {
   const [loading, setLoading] = useState(false);
-  const [cancelled, setCancelled] = useState(false);
+  const [cancelled, setCancelled] = useState(subscription?.cancel_at_period_end ?? false);
   const router = useRouter();
 
   const isActive = subscription?.status === "active";

@@ -8,11 +8,11 @@ export default async function PricingPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  let subscription: { status: string; current_period_end: string | null } | null = null;
+  let subscription: { status: string; current_period_end: string | null; cancel_at_period_end: boolean } | null = null;
   if (user) {
     const { data } = await supabase
       .from("subscriptions")
-      .select("status, current_period_end")
+      .select("status, current_period_end, cancel_at_period_end")
       .eq("user_id", user.id)
       .single();
     subscription = data ?? null;

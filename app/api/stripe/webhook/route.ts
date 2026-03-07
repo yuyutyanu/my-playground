@@ -32,6 +32,7 @@ async function upsertSubscription(
     status: subscription.status,
     price_id: subscription.items.data[0]?.price.id,
     current_period_end: periodEnd ? new Date(periodEnd * 1000).toISOString() : null,
+    cancel_at_period_end: subscription.cancel_at_period_end,
   }, { onConflict: "user_id" });
 }
 
