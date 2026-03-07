@@ -14,6 +14,7 @@ interface Props {
 
 export function PricingClient({ isLoggedIn, subscription }: Props) {
   const [loading, setLoading] = useState(false);
+  const [cancelled, setCancelled] = useState(false);
   const router = useRouter();
 
   const isActive = subscription?.status === "active";
@@ -43,10 +44,13 @@ export function PricingClient({ isLoggedIn, subscription }: Props) {
     try {
       const res = await fetch("/api/stripe/cancel", { method: "POST" });
       if (res.ok) {
-        router.refresh();
+        setCancelled(true);
+      } else {
+        alert("キャンセルに失敗しました。もう一度お試しください。");
       }
     } catch (err) {
       console.error(err);
+      alert("エラーが発生しました。");
     }
     setLoading(false);
   }
@@ -96,16 +100,22 @@ export function PricingClient({ isLoggedIn, subscription }: Props) {
             </div>
             {renewalDate && (
               <p className="text-center text-xs text-[#8c8a87]">
-                次回更新日: {renewalDate}
+                {cancelled ? `${renewalDate}にフリープランへ移行予定` : `次回更新日: ${renewalDate}`}
               </p>
             )}
-            <button
-              onClick={handleCancel}
-              disabled={loading}
-              className={`${condensedFontClass} w-full border border-[#8c8a87] px-6 py-3 text-xs tracking-widest text-[#8c8a87] hover:border-white hover:text-white transition-colors disabled:opacity-50`}
-            >
-              {loading ? "処理中..." : "フリープランに変更する"}
-            </button>
+            {cancelled ? (
+              <div className={`${condensedFontClass} w-full border border-[#8c8a87] px-6 py-3 text-center text-xs tracking-widest text-[#8c8a87] opacity-50`}>
+                キャンセル済み
+              </div>
+            ) : (
+              <button
+                onClick={handleCancel}
+                disabled={loading}
+                className={`${condensedFontClass} w-full border border-[#8c8a87] px-6 py-3 text-xs tracking-widest text-[#8c8a87] hover:border-white hover:text-white transition-colors disabled:opacity-50`}
+              >
+                {loading ? "処理中..." : "フリープランに変更する"}
+              </button>
+            )}
           </div>
         ) : (
           <button
